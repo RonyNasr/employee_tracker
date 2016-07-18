@@ -1,0 +1,18 @@
+<h1><%= @division.name() %></h1>
+
+<a href="/divisions/<%=@division.id()%>/edit" class="btn btn-warning">Edit Division Name</a>
+
+
+<form class="" action="/divisions/<%= @division.id() %>" method="post">
+  <input name = "_method" type="hidden" value="delete">
+  <button class = 'btn btn-danger' type="submit">Delete Division</button>
+</form>
+
+<h4>Employees in <%= @division.name() %></h4>
+<ul>
+<% @division_employees.each() do |employee| %>
+  <li> <% employee.name() %> </li>
+<% end %>
+</ul>
+
+<a href="/" class="btn btn-default active" role="button">Home</a>

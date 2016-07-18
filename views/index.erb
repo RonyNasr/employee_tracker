@@ -1,0 +1,35 @@
+<p>Here are the current divisions:</p>
+
+<ul>
+  <% @divisions.each() do |division| %>
+  <li><a href="/divisions/<%= division.id() %>"><%= division.name() %></a></li>
+  <% end %>
+</ul>
+
+<p>Create a new Division:</p>
+
+<form action="/divisions" method="post">
+  <label for="name">Division Name:</label>
+  <input type="text" name="name" id = "name">
+
+  <button class = 'btn btn-default' type="submit">Add Division</button>
+</form>
+
+<br>
+<hr>
+<p>Here are the current employees:</p>
+
+<ul>
+  <% @employees.each() do |employee| %>
+  <li><a href="/employees/<%= employee.id() %>"><%= employee.name() %></a></li>
+  <% end %>
+</ul>
+
+<p>Create a new Employee:</p>
+
+<form action="/employees" method="post">
+  <label for="employee_name">Division Name:</label>
+  <input type="text" name="employee_name" id = "employee_name">
+
+  <button class = 'btn btn-default' type="submit">Add Employee</button>
+</form>
