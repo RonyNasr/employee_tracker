@@ -17,7 +17,11 @@ end
 post('/divisions') do
   name = params.fetch('name')
   @division = Division.create({:name => name})
-  redirect to('/')
+  if @division.save()
+    redirect to('/')
+  else
+    erb(:errors)
+  end
 end
 
 get('/divisions/:id') do
