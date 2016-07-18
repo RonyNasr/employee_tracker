@@ -1,6 +1,7 @@
 require('sinatra/activerecord')
 require('./lib/employee')
 require('./lib/division')
+require('./lib/project')
 require('sinatra')
 require('sinatra/reloader')
 also_reload('lib/**/*.rb')
@@ -9,6 +10,7 @@ require('pg')
 get('/') do
   @divisions = Division.all()
   @employees = Employee.all()
+  @projects = Project.all()
   erb(:index)
 end
 
@@ -55,12 +57,31 @@ get('/employees/:id') do
 end
 
 patch('/employees/:id') do
-  employee = Employee.find(params['id'].to_i)
-  division_id = params['division_id']
-  employee.update({division_id: division_id})
   @employee = Employee.find(params['id'].to_i)
-  @divisions = Division.all()
+  @division = Division.find(params['division_id'].to_i)
+  division_id = params['division_id']
+  @employee.update({division_id: division_id})
+  @division_employees = @division.employees()
   redirect to ('/')
-  # division = Division.find(params['division_id'].to_i)
-  # employee_id = params['id'].to_i()
+end
+
+post('/projects') do
+  name = params.fetch('project_name')
+  @project = Project.create({:name => name})
+  redirect to('/')
+end
+
+get('/projects/:id') do
+  @project = Project.find(params.fetch('id').to_i())
+  @employees = Employee.all()
+  erb(:project)
+end
+
+patch('/projects/:id') do
+  @employee = Employee.find(params.fetch('employee_id').to_i())
+  @project = Project.find(params['id'].to_i())
+  project_id = params['id']
+  @employee.update({project_id: project_id})
+  @employees = Employee.all()
+  erb(:project)
 end

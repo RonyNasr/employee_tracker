@@ -11,7 +11,7 @@
 <h4>Employees in <%= @division.name() %></h4>
 <ul>
 <% @division_employees.each() do |employee| %>
-  <li> <% employee.name() %> </li>
+  <li> <%= employee.name() %> </li>
 <% end %>
 </ul>
 

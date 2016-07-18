@@ -1,0 +1,24 @@
+<h1> <%= @project.name() %></h1>
+
+
+<h4> Employees assigned to <%= @project.name()%>: </h4>
+<ul>
+  <% @project.employees().each() do |employee| %>
+    <li> <%= employee.name() %></li>
+  <% end %>
+</ul>
+
+<h4> Add an employee to <%= @project.name() %>
+
+<form action="/projects/<%= @project.id() %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <select id="employee_id" name="employee_id" type="text">
+    <% @employees.each() do |employee| %>
+      <option value = "<%= employee.id() %>"> <%= employee.name() %> </option>
+    <% end %>
+  </select>
+  <button class="btn btn-primary active" type="submit">Assign employee</button>
+
+</form>
+
+<a href="/" class="btn btn-default active" role="button">Home</a>
