@@ -53,6 +53,7 @@ end
 get('/employees/:id') do
   @employee = Employee.find(params['id'].to_i)
   @divisions = Division.all()
+  @projects = Project.all()
   erb(:employee)
 end
 
@@ -84,4 +85,21 @@ patch('/projects/:id') do
   @employee.update({project_id: project_id})
   @employees = Employee.all()
   erb(:project)
+end
+
+patch('/employees/:id/projects') do
+  @employee = Employee.find(params['id'].to_i())
+  project_id = params['project_id']
+  @employee.update({project_id: project_id})
+  redirect to('/')
+end
+
+patch("/projects/:id/remove_employee") do
+  employee_id = params['employee_id']
+  @employee = Employee.find(employee_id)
+  project_id = params['id']
+  @employee.update({project_id: 0})
+  @project = Project.find(project_id)
+  @employees = Employee.all()
+  redirect to('/')
 end

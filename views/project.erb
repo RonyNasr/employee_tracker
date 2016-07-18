@@ -21,4 +21,16 @@
 
 </form>
 
+<h4>Remove an employee from <%= @project.name() %></h4>
+
+<form action="/projects/<%=@project.id()%>/remove_employee" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <select id="employee_id" name="employee_id" type="text">
+    <% @project.employees().each() do |employee| %>
+      <option value = "<%= employee.id() %>"> <%= employee.name() %> </option>
+    <% end %>
+  </select>
+  <button class="btn btn-primary active" type="submit">Remove Employee</button>
+</form>
+
 <a href="/" class="btn btn-default active" role="button">Home</a>

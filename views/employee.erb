@@ -10,5 +10,17 @@
     <% end %>
   </select>
   <button class="btn btn-primary active" type="submit" name="add_division">Assign Division</button>
+</form>
+
+<h4>Assign <%= @employee.name() %> to a Project:</h4>
+
+<form action="/employees/<%= @employee.id() %>/projects" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <select id="project_id" name="project_id" type="text">
+    <% @projects.each() do |project| %>
+      <option value = "<%= project.id() %>"> <%= project.name() %> </option>
+    <% end %>
+  </select>
+  <button class="btn btn-primary active" type="submit">Assign project</button>
 
 </form>
